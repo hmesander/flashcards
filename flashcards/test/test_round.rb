@@ -1,7 +1,6 @@
 require '../lib/round.rb'
 require '../lib/deck.rb'
 require '../lib/card.rb'
-require '../lib/guess.rb'
 require 'minitest'
 require 'minitest/autorun'
 require 'minitest/pride'
@@ -16,8 +15,11 @@ class RoundTest < Minitest::Test
     @round = Round.new(@deck)
   end
 
-  def test_round_class_and_deck_argument
+  def test_round_class
     assert_instance_of Round, @round
+  end
+
+  def test_for_deck_argument
     assert @deck, @round.deck
   end
 
@@ -27,10 +29,26 @@ class RoundTest < Minitest::Test
 
   def test_for_current_card_method
     assert @card_1, @round.current_card
+    assert @card_2, @round.current_card
   end
 
   def test_for_record_guess_method
     assert @guess, @round.record_guess("Juneau")
+    assert @guess, @round.record_guess("2")
   end
+
+  def test_for_guesses_count_method
+    assert_equal 1, @round.guesses.count
+    assert_equal 2, @round.guesses.count
+  end
+
+  def test_for_round_guesses_first_feedback_method
+    assert "Correct!", @round.guesses.first.feedback
+  end
+
+  def test_for_number_correct_method
+    assert_equal 1, @round.number_correct
+  end
+
 
 end
