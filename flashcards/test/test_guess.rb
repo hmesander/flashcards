@@ -7,31 +7,32 @@ require 'minitest/pride'
 class GuessTest < Minitest::Test
 
   def setup
-    @card1 = Card.new("What is the capital of Alaska?", "Juneau")
-    @guess1 = Guess.new("Juneau", @card1)
-    @guess2 = Guess.new("Saturn", @card1)
+    @card_1 = Card.new("What is the capital of Alaska?", "Juneau")
+    @card_2 = Card.new("Which planet is closest to the sun?", "Mercury")
+    @guess_1 = Guess.new("Juneau", @card_1)
+    @guess_2 = Guess.new("Saturn", @card_2)
   end
 
   def test_guess_class_exists
-    assert_instance_of Guess, @guess1
+    assert_instance_of Guess, @guess_1
   end
 
   def test_for_response_argument
-    assert_equal "Juneau", @guess1.response
+    assert "Juneau", @guess_1.response
   end
 
   def test_for_card_argument
-    assert_equal @card1, @guess1.card
+    assert @card_1, @guess_1.card
   end
 
   def test_for_correct_method
-    assert true, @guess1.correct?
-    assert false, @guess2.correct?
+    assert @guess_1.correct?
+    refute @guess_2.correct?
   end
 
   def test_for_feedback_method
-     assert "Correct!", @guess1.feedback
-     assert "Incorrect", @guess1.feedback
+     assert "Correct!", @guess_1.feedback
+     assert "Incorrect", @guess_1.feedback
   end
 
 end
