@@ -20,35 +20,49 @@ class RoundTest < Minitest::Test
   end
 
   def test_for_deck_argument
-    assert @deck, @round.deck
-  end
-
-  def test_for_guesses_method
-    assert [], @round.guesses
+    assert_equal @deck, @round.deck
   end
 
   def test_for_current_card_method
-    assert @card_1, @round.current_card
-    assert @card_2, @round.current_card
+    assert_equal @card_1, @round.current_card
+    assert_equal @card_2, @round.current_card
+  end
+
+  def test_for_guesses_method
+    assert_equal [], @round.guesses
   end
 
   def test_for_record_guess_method
-    assert @guess, @round.record_guess("Juneau")
+    assert_equal @guess, @round.record_guess("Juneau")
     assert @guess, @round.record_guess("2")
   end
 
   def test_for_guesses_count_method
+    @round.record_guess("Juneau")
     assert_equal 1, @round.guesses.count
+    @round.record_guess("2")
     assert_equal 2, @round.guesses.count
   end
 
   def test_for_round_guesses_first_feedback_method
-    assert "Correct!", @round.guesses.first.feedback
+    @round.record_guess("Juneau")
+    assert_equal "Correct!", @round.guesses.first.feedback
+    @round.record_guess("2")
+    assert_equal "Incorrect.", @round.guesses.last.feedback
   end
 
   def test_for_number_correct_method
+    @round.record_guess("Juneau")
+    assert_equal 1, @round.number_correct
+    @round.record_guess("2")
     assert_equal 1, @round.number_correct
   end
 
+  def test_for_percent_correct_method
+    @round.record_guess("Juneau")
+    @round.record_guess("2")
+    @round.number_correct
+    assert_equal 50, @round.percent_correct
+  end
 
 end

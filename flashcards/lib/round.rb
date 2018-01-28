@@ -2,34 +2,38 @@ require '../lib/deck.rb'
 require '../lib/guess.rb'
 
 class Round
-  attr_reader :deck
+  attr_reader :deck,
+              :guesses
 
   def initialize (deck)
-    @deck = deck
-    @card = Card.new("What is the capital of Alaska?", "Juneau")
-    @guess = Guess.new("Juneau", @card)
-  end
-
-  def guesses
-    []
-    [] << @guess
-    [] << @guess
+    @deck                 = deck
+    @guesses              = []
+    @correct_counter      = 0
   end
 
   def current_card
-    Card.new("What is the capital of Alaska?", "Juneau")
+    @deck.cards.shift
   end
 
-  def record_guess(guess)
-    @guess
+  def guesses
+    @guesses
   end
 
-  def count
-    guesses.length
+  def record_guess(response)
+    @guesses = @guesses.push(Guess.new(response, @deck.cards.shift))
   end
 
   def number_correct
-    1
+    @guesses.each do |guess|
+      if guess.feedback == "Correct!"
+        @correct_counter += 1
+      end
+    end
+    @correct_counter
+  end
+
+  def percent_correct
+    @correct_counter / @guesses.count
   end
 
 end

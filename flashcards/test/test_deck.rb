@@ -17,11 +17,11 @@ class DeckTest < Minitest::Test
   end
 
   def test_for_cards_argument
-    assert [@card_1, @card_2, @card_3], @deck.cards
+    assert_equal [@card_1, @card_2, @card_3], @deck.cards
   end
 
   def test_for_count_method
-    assert 3, @deck.count
+    assert_equal 3, @deck.count
   end
 
 end

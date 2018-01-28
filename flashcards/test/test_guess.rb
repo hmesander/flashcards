@@ -18,11 +18,11 @@ class GuessTest < Minitest::Test
   end
 
   def test_for_response_argument
-    assert "Juneau", @guess_1.response
+    assert_equal "Juneau", @guess_1.response
   end
 
   def test_for_card_argument
-    assert @card_1, @guess_1.card
+    assert_equal @card_1, @guess_1.card
   end
 
   def test_for_correct_method
@@ -31,8 +31,8 @@ class GuessTest < Minitest::Test
   end
 
   def test_for_feedback_method
-     assert "Correct!", @guess_1.feedback
-     assert "Incorrect", @guess_1.feedback
+     assert_equal "Correct!", @guess_1.feedback
+     assert_equal "Incorrect.", @guess_2.feedback
   end
 
 end
