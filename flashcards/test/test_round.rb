@@ -34,8 +34,8 @@ class RoundTest < Minitest::Test
   end
 
   def test_for_record_guess_method
-    assert_equal @guess_1, @round.record_guess(@guess_1)
-    assert_equal @guess_2, @round.record_guess(@guess_2)
+    assert @guess_1 == @round.record_guess("Juneau")
+    assert @guess_2 == @round.record_guess("2")
   end
 
   def test_for_guesses_count_method

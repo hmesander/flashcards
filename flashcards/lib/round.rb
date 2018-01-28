@@ -1,33 +1,34 @@
 require '../lib/deck.rb'
 require '../lib/guess.rb'
+require 'pry'
 
 class Round
   attr_reader :deck,
               :guesses
 
   def initialize (deck)
-    @deck                 = deck
-    @guesses              = []
-    @correct_count        = 0
-    @card_number          = 0
+    @deck                   = deck
+    @guesses                = []
+    @correct_count          = 0
+    @card_number_position   = 0
   end
 
   def current_card
-     @card_number += 1
-     @card_number
+    @current_card = @deck.cards[@card_number_position]
+    @card_number_position += 1
+    @current_card
   end
 
   def record_guess(response)
-    @guesses << response
+    @guesses << Guess.new(response, current_card)
+    @guesses.last
   end
 
   def number_correct
-    @guesses.each do |guess|
-      if guess.correct? == true
-        @correct_count += 1
-      end
+    correct_guesses_array = @guesses.select do |guess|
+      guess.correct?
     end
-    @correct_count
+    @correct_count = correct_guesses_array.length
   end
 
   def percent_correct
