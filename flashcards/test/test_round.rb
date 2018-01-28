@@ -10,7 +10,8 @@ class RoundTest < Minitest::Test
   def setup
     @card_1 = Card.new("What is the capital of Alaska?", "Juneau")
     @card_2 = Card.new("Approximately how many miles are in one astronomical unit?", "93,000,000")
-    @guess = Guess.new("Juneau", @card_1)
+    @guess_1 = Guess.new("Juneau", @card_1)
+    @guess_2 = Guess.new("2", @card_2)
     @deck = Deck.new([@card_1, @card_2])
     @round = Round.new(@deck)
   end
@@ -33,8 +34,8 @@ class RoundTest < Minitest::Test
   end
 
   def test_for_record_guess_method
-    assert_equal @guess, @round.record_guess("Juneau")
-    assert @guess, @round.record_guess("2")
+    assert_equal @guess_1, @round.record_guess(@guess_1)
+    assert_equal @guess_2, @round.record_guess(@guess_2)
   end
 
   def test_for_guesses_count_method

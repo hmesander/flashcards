@@ -8,32 +8,30 @@ class Round
   def initialize (deck)
     @deck                 = deck
     @guesses              = []
-    @correct_counter      = 0
+    @correct_count        = 0
+    @card_number          = 0
   end
 
   def current_card
-    @deck.cards.shift
-  end
-
-  def guesses
-    @guesses
+     @card_number += 1
+     @card_number
   end
 
   def record_guess(response)
-    @guesses = @guesses.push(Guess.new(response, @deck.cards.shift))
+    @guesses << response
   end
 
   def number_correct
     @guesses.each do |guess|
-      if guess.feedback == "Correct!"
-        @correct_counter += 1
+      if guess.correct? == true
+        @correct_count += 1
       end
     end
-    @correct_counter
+    @correct_count
   end
 
   def percent_correct
-    @correct_counter / @guesses.count
+    ((@correct_count.to_f / @guesses.length) * 100).round
   end
 
 end

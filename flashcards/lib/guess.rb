@@ -9,7 +9,7 @@ class Guess
   end
 
   def correct?
-    if response == @card.answer
+    if @response == @card.answer
      true
     else
      false
@@ -17,7 +17,7 @@ class Guess
   end
 
   def feedback
-    if response == @card.answer
+    if @response == @card.answer
       "Correct!"
     else
       "Incorrect."
