@@ -6,34 +6,29 @@ class LinkedList
 
   def initialize(head=nil)
     @head = head
-    @node_number = 0
     @data = []
   end
 
   def append(data)
-    if @head == nil
-      @node_number += 1
-      @data << data
-      @head = Node.new(data)
-    else
-      @node_number += 1
-      @most_recent_data = data
-      @data << data
-      next_node(data)
-    end
+      if @head == nil
+        @data << data
+        @head = Node.new(data)
+      else
+        @data << data
+        next_node(data)
+      end
   end
 
   def next_node(data)
-    Node.new(data, @node_number)
+    @head.next_node = Node.new(data)
   end
 
   def count
-    @node_number
+    @data.count
   end
 
   def to_string
-    string_data = @data[0]
-   "The #{string_data} family"
+   "The #{@data[0]} family, followed by the #{@data[1]} family"
   end
 
 end
