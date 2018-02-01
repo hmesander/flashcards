@@ -1,5 +1,5 @@
 require 'pry'
-require_relative 'node.rb'
+require_relative 'node'
 
 class LinkedList
   attr_reader :head
@@ -38,14 +38,14 @@ class LinkedList
 
   def insert(position, data)
     new_node = Node.new(data)
-    count = 0
-    node = @head
-    until position - 1 == count
-      node = node.next_node
+    count = 1
+    current_node = @head
+    until position == count
+      current_node = current_node.next_node
       count += 1
     end
-    new_node.next_node = node.next_node
-    node.next_node = new_node
+    new_node.next_node = current_node.next_node
+    current_node.next_node = new_node
   end
 
   def next_node
@@ -57,7 +57,35 @@ class LinkedList
   end
 
   def to_string
-   "The #{@head.surname} family, followed by the #{@head.next_node.surname} family, followed by the #{@head.next_node.next_node.surname} family."
+    response = ""
+    if @head.next_node == nil
+      "The #{head.surname} family"
+    else
+      response = "The #{@head.surname} family"
+      current_node = @head
+      while current_node.next_node != nil
+        current_node = current_node.next_node
+        response += ", followed by the #{current_node.surname} family"
+      end
+      response
+    end
+  end
+
+  def includes?(data)
+    if to_string.include?(data)
+      true
+    else
+      false
+    end
+  end
+
+  def pop
+    current_node = @head
+    until current_node.next_node == nil
+      current_node = current_node.next_node
+    end
+    current_node.next_node = nil
+    puts "The #{current_node.surname} family has died of dysentery."
   end
 
 end

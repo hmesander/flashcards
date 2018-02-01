@@ -1,5 +1,5 @@
-require './lib/node.rb'
-require './lib/linkedlist.rb'
+require './lib/node'
+require './lib/linkedlist'
 require 'minitest'
 require 'minitest/autorun'
 require 'minitest/pride'
@@ -10,6 +10,7 @@ class LinkedListTest < Minitest::Test
   def test_linkedlist_class_exists
     list = LinkedList.new
     assert_instance_of LinkedList, list
+
     assert_nil list.head
   end
 
@@ -18,6 +19,7 @@ class LinkedListTest < Minitest::Test
     list.append("Brooks")
     list.append("Henderson")
     node_just_added = list.prepend("McKinney")
+
     assert_equal list.head.surname, node_just_added.surname
     assert_equal list.head.next_node.surname, "Brooks"
     assert_equal list.head.next_node.next_node.surname, "Henderson"
@@ -62,9 +64,30 @@ class LinkedListTest < Minitest::Test
   def test_for_to_string_method
     list = LinkedList.new
     list.append("Brooks")
+    assert_equal "The Brooks family", list.to_string
     list.append("Henderson")
+    assert_equal "The Brooks family, followed by the Henderson family", list.to_string
     list.prepend("McKinney")
-    assert_equal "The McKinney family, followed by the Brooks family, followed by the Henderson family.", list.to_string
+    assert_equal "The McKinney family, followed by the Brooks family, followed by the Henderson family", list.to_string
   end
 
+  def test_for_includes_method
+    list = LinkedList.new
+    list.append("Brooks")
+    list.append("Henderson")
+    list.prepend("McKinney")
+
+    assert list.includes?("Brooks")
+    refute list.includes?("Chapman")
+    refute list.includes?("Bob")
+  end
+
+  def test_for_pop_method
+    list = LinkedList.new
+    list.append("Brooks")
+    list.append("Henderson")
+    list.prepend("McKinney")
+
+    assert_equal Node.new("Henderson"), list.pop
+  end
 end
