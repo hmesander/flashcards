@@ -90,25 +90,23 @@ class LinkedList
     last
   end
 
+  #I know this find method is too long - having trouble breaking it up
   def find(index, number_of_elements)
     current_node = @head
     position = 0
-    while position != index
+    until position == index
       current_node = current_node.next_node
       position += 1
     end
-    find_head = Node.new(current_node)
-    find_current_node = find_head
+    sub_list = LinkedList.new(current_node)
+
+    current_node = sub_list.head
     counter = 1
-    while counter != number_of_elements
-      find_current_node.next_node = Node.new(current_node.next_node)
+    until counter == number_of_elements || current_node.next_node == nil
       current_node = current_node.next_node
-      find_current_node = find_current_node.next_node
-      counter += 1
     end
-    find_current_node.next_node = nil
-    find_head
-    to_string
+    current_node.next_node = nil
+    sub_list.to_string
   end
 
 end

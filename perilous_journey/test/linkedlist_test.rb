@@ -123,14 +123,15 @@ class LinkedListTest < Minitest::Test
     assert_equal "The Smith family, followed by the Mesander family", list.to_string
   end
 
-  # def test_for_find_method
-  #   list = LinkedList.new
-  #   list.append("Brooks")
-  #   list.append("McKinney")
-  #   list.append("Smith")
-  #   list.append("Mesander")
-  #   assert_equal "The Brooks family", list.find(0,1)
-  #   assert_equal "The Brooks family, followed by the McKinney family", list.find(0,2)
-  # end
+  def test_for_find_method
+    list = LinkedList.new
+    list.append("Brooks")
+    list.append("McKinney")
+    list.append("Smith")
+    list.append("Mesander")
+
+    assert_equal "The Brooks family", list.find(0,1)
+    assert_equal "The McKinney family", list.find(1,1) #this is where it is failing
+  end
 
 end

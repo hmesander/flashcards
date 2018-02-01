@@ -21,8 +21,10 @@ class WagonTrainTest < Minitest::Test
     wt = WagonTrain.new
     head_added = wt.append("Burke")
     assert_equal wt.list.head, head_added
+
     next_node_added = wt.append("Smith")
     assert_equal wt.list.head.next_node, next_node_added
+
     assert_equal "Burke", wt.list.head.surname
   end
 
@@ -37,14 +39,16 @@ class WagonTrainTest < Minitest::Test
     wt.append("Burke", {"pounds of food" => 200})
     wt.append("Smith", {"bottles of medicine" => 3})
     assert_equal 2, wt.count
+
     wt.append("Mesander", {"blankets" => 4})
     assert_equal 3, wt.count
   end
 
-  def test_for_supplies_list
+  def test_for_supplies_list #ran out of time to implement this method
     wt = WagonTrain.new
     wt.append("Burke", {"pounds of food" => 200})
     assert_equal {"pounds of food" => 200}, wt.supplies
+
     wt.append("Smith", {"fish" => 3})
     wt.append("Mesander", {"blankets" => 4})
 

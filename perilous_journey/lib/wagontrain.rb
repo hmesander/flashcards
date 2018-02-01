@@ -16,9 +16,4 @@ class WagonTrain
     @list.list_count
   end
 
-  def supplies
-    head = @list.head
-    head.supplies
-  end
-
 end
