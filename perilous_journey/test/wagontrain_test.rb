@@ -49,10 +49,10 @@ class WagonTrainTest < Minitest::Test
     wt.append("Burke", {"pounds of food" => 200})
     assert_equal {"pounds of food" => 200}, wt.supplies
 
-    wt.append("Smith", {"fish" => 3})
+    wt.append("Smith", {"blankets" => 3})
     wt.append("Mesander", {"blankets" => 4})
 
-    expected = {"pounds of food" => 200, "fish" => 3, "blankets" => 4}
+    expected = {"pounds of food" => 200, "blankets" => 7}
     actual = wt.supplies
 
     assert_equal = expected, actual
