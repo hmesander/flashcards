@@ -51,14 +51,14 @@ class LinkedListTest < Minitest::Test
     assert_nil list.head.next_node
   end
 
-  def test_for_count_method
+  def test_for_list_count_method
     list = LinkedList.new
     list.append("West")
-    assert_equal 1, list.count
+    assert_equal 1, list.list_count
     list.append("Hardy")
-    assert_equal 2, list.count
+    assert_equal 2, list.list_count
     list.append("Mesander")
-    assert_equal 3, list.count
+    assert_equal 3, list.list_count
   end
 
   def test_for_to_string_method
@@ -99,10 +99,11 @@ class LinkedListTest < Minitest::Test
   def test_for_find_method
     list = LinkedList.new
     list.append("Brooks")
-    assert_equal "The Brooks family", list.find(0,1)
-
     list.append("McKinney")
-    assert_equal "The Brooks family, followed by the McKinney family", list.find(1,2)
+    list.append("Smith")
+    list.append("Mesander")
+    assert_equal "The Brooks family", list.find(0,1)
+    assert_equal "The Brooks family, followed by the McKinney family", list.find(0,2)
   end
 
 end

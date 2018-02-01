@@ -52,7 +52,7 @@ class LinkedList
     @head.next_node
   end
 
-  def count
+  def list_count
     @list_count
   end
 
@@ -97,13 +97,17 @@ class LinkedList
       current_node = current_node.next_node
       position += 1
     end
-    current_node = @head
+    find_head = Node.new(current_node)
+    find_current_node = find_head
     counter = 1
     while counter != number_of_elements
+      find_current_node.next_node = Node.new(current_node.next_node)
       current_node = current_node.next_node
-      append(current_node.surname)
+      find_current_node = find_current_node.next_node
       counter += 1
     end
+    find_current_node.next_node = nil
+    find_head
     to_string
   end
 
