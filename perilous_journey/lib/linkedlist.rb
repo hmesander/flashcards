@@ -81,11 +81,30 @@ class LinkedList
 
   def pop
     current_node = @head
-    until current_node.next_node == nil
+    until current_node.next_node.next_node == nil
       current_node = current_node.next_node
     end
+    puts "The #{current_node.next_node.surname} family has died of dysentery."
+    last = current_node.next_node
     current_node.next_node = nil
-    puts "The #{current_node.surname} family has died of dysentery."
+    last
+  end
+
+  def find(index, number_of_elements)
+    current_node = @head
+    position = 0
+    while position != index
+      current_node = current_node.next_node
+      position += 1
+    end
+    current_node = @head
+    counter = 1
+    while counter != number_of_elements
+      current_node = current_node.next_node
+      append(current_node.surname)
+      counter += 1
+    end
+    to_string
   end
 
 end

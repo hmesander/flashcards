@@ -84,10 +84,25 @@ class LinkedListTest < Minitest::Test
 
   def test_for_pop_method
     list = LinkedList.new
-    list.append("Brooks")
-    list.append("Henderson")
-    list.prepend("McKinney")
+    second_from_last = list.append("Brooks")
+    last = list.append("Henderson")
+    third_from_last = list.prepend("McKinney")
+    first = list.prepend("Mesander")
+    list.prepend("Smith")
 
-    assert_equal Node.new("Henderson"), list.pop
+    assert_equal last, list.pop
+    assert_equal second_from_last, list.pop
+    assert_equal third_from_last, list.pop
+    assert_equal "The Smith family, followed by the Mesander family", list.to_string
   end
+
+  def test_for_find_method
+    list = LinkedList.new
+    list.append("Brooks")
+    assert_equal "The Brooks family", list.find(0,1)
+
+    list.append("McKinney")
+    assert_equal "The Brooks family, followed by the McKinney family", list.find(1,2)
+  end
+
 end
