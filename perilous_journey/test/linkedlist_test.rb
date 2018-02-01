@@ -25,15 +25,30 @@ class LinkedListTest < Minitest::Test
     assert_equal list.head.next_node.next_node.surname, "Henderson"
   end
 
+  def test_for_prepend_method_with_supplies
+    list = LinkedList.new
+    new_node_with_supplies = list.prepend("West", {"pounds of food" => 200})
+    assert_equal list.head, new_node_with_supplies
+  end
+
   def test_for_append_method
     list = LinkedList.new
     assert_nil list.head
+
     node_just_added = list.append("West")
     assert_equal list.head.surname, node_just_added.surname
+
     node_just_added = list.append("Hardy")
     assert_equal list.head.next_node.surname, node_just_added.surname
+
     node_just_added = list.append("Mesander")
     assert_equal list.head.next_node.next_node.surname, node_just_added.surname
+  end
+
+  def test_for_append_method_with_supplies
+    list = LinkedList.new
+    new_node_with_supplies = list.append("West", {"pounds of food" => 200})
+    assert_equal list.head, new_node_with_supplies
   end
 
   def test_for_insert_method
@@ -41,8 +56,20 @@ class LinkedListTest < Minitest::Test
     list.append("Brooks")
     list.append("Henderson")
     list.prepend("McKinney")
+
     node_inserted = list.insert(1, "Lawson")
     assert_equal list.head.next_node.surname, node_inserted.surname
+  end
+
+  def test_for_insert_method_with_supplies
+    list = LinkedList.new
+    list = LinkedList.new
+    list.append("Brooks")
+    list.append("Henderson")
+    list.prepend("McKinney")
+
+    new_node_with_supplies = list.insert(1, "West", {"pounds of food" => 200})
+    assert_equal list.head.next_node, new_node_with_supplies
   end
 
   def test_for_next_node_method
@@ -96,14 +123,14 @@ class LinkedListTest < Minitest::Test
     assert_equal "The Smith family, followed by the Mesander family", list.to_string
   end
 
-  def test_for_find_method
-    list = LinkedList.new
-    list.append("Brooks")
-    list.append("McKinney")
-    list.append("Smith")
-    list.append("Mesander")
-    assert_equal "The Brooks family", list.find(0,1)
-    assert_equal "The Brooks family, followed by the McKinney family", list.find(0,2)
-  end
+  # def test_for_find_method
+  #   list = LinkedList.new
+  #   list.append("Brooks")
+  #   list.append("McKinney")
+  #   list.append("Smith")
+  #   list.append("Mesander")
+  #   assert_equal "The Brooks family", list.find(0,1)
+  #   assert_equal "The Brooks family, followed by the McKinney family", list.find(0,2)
+  # end
 
 end

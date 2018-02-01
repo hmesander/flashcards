@@ -9,8 +9,8 @@ class LinkedList
     @list_count = 0
   end
 
-  def prepend(data)
-    new_node = Node.new(data)
+  def prepend(data, supplies=nil)
+    new_node = Node.new(data, supplies)
     if @head == nil
       @list_count += 1
       @head = new_node
@@ -21,8 +21,8 @@ class LinkedList
     end
   end
 
-  def append(data)
-    new_node = Node.new(data)
+  def append(data, supplies=nil)
+    new_node = Node.new(data, supplies=nil)
     if @head == nil
       @list_count += 1
       @head = new_node
@@ -36,8 +36,8 @@ class LinkedList
     end
   end
 
-  def insert(position, data)
-    new_node = Node.new(data)
+  def insert(position, name, supplies=nil)
+    new_node = Node.new(name, supplies=nil)
     count = 1
     current_node = @head
     until position == count
